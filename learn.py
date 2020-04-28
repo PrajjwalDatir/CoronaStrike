@@ -3,6 +3,8 @@ import time
 import random
 import math
 
+
+
 #to initialize the pygame module
 pygame.init()
 
@@ -40,13 +42,15 @@ playerY = 500
 coor_player = (playerX, playerY)
 player_movX = 0
 player_movY = 0
+player_vel = 0.5
 
 #Bullet - kill la kill
 bulletImg = pygame.image.load('bullet_1.png')
 bulletX = 0
 bulletY = 0
-bullet_movY = 5
+# bullet_movY = 5
 bullet_state = 'ready'
+bullet_vel = 1
 
 #level 1 corona-virus
 corona_1_Img = pygame.image.load('corona_1.png')
@@ -54,6 +58,8 @@ corona_1X = random.randint(100, 600)
 corona_1Y = random.randint(50, 150)
 corona_movX = 1
 corona_movY = 48
+corona_vel = 0.3
+
 
 def my_score():
 	textX = 10
@@ -87,10 +93,15 @@ def isCollision(enemyX, enemyY, bulletX, bulletY):
 		return True
 	return False
 
+# FPS
+pygame.display.set_caption("FPS")
+	
+clock = pygame.time.Clock()
 
 #main game-loop
 while running:
 
+	dt = clock.tick(30)
 	# Background color
 	screen.fill((0,0,0))
 	# Background Image
@@ -108,13 +119,14 @@ while running:
 	# if keystroke is pressed check its left or right
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_RIGHT:
-				player_movX = 2
-				print("right")
+				player_movX = (dt * player_vel)
 			elif event.key == pygame.K_LEFT:
-				player_movX = -2
-				print("left")
+				player_movX = -(dt * player_vel)
+			# elif event.key == pygame.K_UP:
+			# 	player_movY = -(dt * player_vel)
+			# elif event.key == pygame.K_DOWN:
+			# 	player_movY = (dt * player_vel)
 			elif event.key == pygame.K_SPACE:
-	  			print("Shoot.")
 	  			if bullet_state == 'ready':
 	  				bullet_sound = pygame.mixer.Sound('laser.wav')
 	  				bullet_sound.play()
@@ -128,16 +140,19 @@ while running:
 				pass
 		if event.type == pygame.KEYUP:
 			if event.key == pygame.K_SPACE:
-				print("space released")
+				pass
 			elif event.key == pygame.K_ESCAPE:
 				running = False
 				print("Existing the Game.")
 			elif event.key == pygame.K_RIGHT:
 				player_movX = 0
-				print("right")
 			elif event.key == pygame.K_LEFT:
 				player_movX = 0 
-				print("left")
+			# elif event.key == pygame.K_UP:
+			# 	player_movY = 0
+			# elif event.key == pygame.K_DOWN:
+			# 	player_movY = 0
+			
 
 	# Boundary conditions : don't leave the screen player
 
@@ -153,10 +168,11 @@ while running:
 	playerX += player_movX
 	playerY += player_movY
 
+
 		#for Bullet
 	if bullet_state == 'fired':
 		fire_bullet(bulletX, bulletY)
-		bulletY -= bullet_movY
+		bulletY -= (dt * bullet_vel)
 	if bulletY <= 0:
 		bullet_state = 'ready'
 	
@@ -187,7 +203,8 @@ while running:
 		corona_1Y = 0		
 	elif corona_1Y >= 552:
 		corona_1Y = 552
-	corona_1X += corona_movX
+	corona_1X += corona_movX * (dt * corona_vel)
+	
 	if running == False:
 		game_over_text()
 	pygame.display.update()
