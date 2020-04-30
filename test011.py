@@ -110,8 +110,8 @@ while running:
 						c.corona_1_Img[j] = c.corona_1_Img_left
 						c.corona_1_Img[i] = c.corona_1_Img_right
 					else:
-						c.corona_1X[j] += 4
-						c.corona_1X[i] -= 4
+						c.corona_1X[j] += 52 - abs(c.corona_1X[i] - c.corona_1X[j])
+						c.corona_1X[i] -= 52 - abs(c.corona_1X[i] - c.corona_1X[j])
 						c.corona_1_Img[j] = c.corona_1_Img_right 
 						c.corona_1_Img[i] = c.corona_1_Img_left
 
