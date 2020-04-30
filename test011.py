@@ -10,7 +10,7 @@ from my_enemy import *
 from my_score import *
 from my_mechanics import *
 from my_bullet import *
-# from my_movement import *
+from my_movement import *
 
 #to initialize the pygame module
 pygame.init()
@@ -40,7 +40,7 @@ g = game_over()
 b = my_bullet()
 s = info_game()
 m = mechanics()
-# key = movement()
+key = movement()
 clock = pygame.time.Clock()
 while running:
 	dt = clock.tick_busy_loop(30)
@@ -52,41 +52,9 @@ while running:
 	c.corona_1(c.corona_1X, c.corona_1Y, screen)
 	s.my_score(screen)
 	s.my_fps(dt, screen)
-	# running = key.move(p, b, dt)
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			running = False
-		# if keystroke is pressed check its left or right
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_RIGHT:
-				p.player_movX = (dt * p.player_vel)
-				print("right")
-			elif event.key == pygame.K_LEFT:
-				print("left")
-				p.player_movX = -(dt * p.player_vel)
-			elif event.key == pygame.K_SPACE:
-				if b.bullet_state == 'ready':
-					b.shoot(p, screen)
-			elif event.key == pygame.K_ESCAPE:
-				print("Escape key.")
-			else:
-				pass
-		if event.type == pygame.KEYUP:
-			if event.key == pygame.K_SPACE:
-				pass
-			elif event.key == pygame.K_ESCAPE:
-				running = False
-				print("Existing the Game.")
-			elif event.key == pygame.K_RIGHT:
-				p.player_movX = 0
-			elif event.key == pygame.K_LEFT:
-				p.player_movX = 0 
-			# elif event.key == pygame.K_UP:
-			# 	player_movY = 0
-			# elif event.key == pygame.K_DOWN:
-			# 	player_movY = 0
-
-			# collision
+	
+	running = key.move(p, b, dt, screen)
+	
 	for i in range(5):		
 		for j in range(i + 1, 5):
 			if c.corona_1Y[i] == c.corona_1Y[j]:
