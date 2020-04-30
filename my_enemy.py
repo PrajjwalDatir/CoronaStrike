@@ -9,35 +9,38 @@ class my_corona_1():
 	def __init__(self):
 		self.corona_1_Img_right = pygame.image.load('corona_2.png')
 		self.corona_1_Img_left = pygame.image.load('corona_1.png')
-		self.corona_1_Img = []
-		self.corona_1X = []
-		self.corona_1Y = []
+		self.corona_1_Img = [self.corona_1_Img_right]*5
+		self.corona_1X = [None]*5
+		self.corona_1Y = [None]*5
 		self.corona_choice = [30, 78, 126, 174]
 		self.corona_movX = [1]*5
 		self.corona_movY = [48]*5
 		self.corona_vel = 0.3
 		
-		def spawn_corona(self, i):
-			# for i in range(5):
-			self.corona_1_Img.append(self.corona_1_Img_right)
-			again = True
-			while again:
-				self.corona_1X.append(random.randint(100, 600))
-				self.corona_1Y.append(random.choice(self.corona_choice))
-				if i == 0:
+	def spawn_corona(self, i):
+		# for i in range(5):
+		again = True
+		while again:
+			# self.corona_1X.append(random.randint(100, 600))
+			# self.corona_1Y.append(random.choice(self.corona_choice))
+			self.corona_1X[i] = random.randint(100, 600)
+			self.corona_1Y[i] = random.choice(self.corona_choice)
+			if i == 0:
+				break
+			for j in range(0, 5):
+				if i == j:
+					continue
+				print("[", self.corona_1X[i], ",", self.corona_1Y[i], "]")
+				if (abs(self.corona_1X[i] - self.corona_1X[j]) < 96):
+				# (self.corona_1Y[i] == self.corona_1Y[j]) and
+					again = True
+					# self.corona_1X.pop()
+					# self.corona_1Y.pop()
 					break
-				for j in range(0, 5):
-					print("[", self.corona_1X, ",", self.corona_1Y)
-					if (self.corona_1Y[i] == self.corona_1Y[j]) and (abs(self.corona_1X[i] - self.corona_1X[j]) < 96):
-						again = True
-						self.corona_1X.pop()
-						self.corona_1Y.pop()
-						break
-					else:
-						again = False
-						break
-		for i in range(5):
-			spawn_corona(self, i)
+				else:
+					again = False
+					break
+
 
 	def corona_1(self, corona_1X, corona_1Y, screen):	
 		for i in range(5):

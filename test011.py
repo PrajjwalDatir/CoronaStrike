@@ -26,13 +26,16 @@ pygame.display.set_caption("Corona Strike 0.0.1")
 icon = pygame.image.load('Code_Maniac.jpg')
 pygame.display.set_icon(icon)
 
-pygame.mixer.music.load('background.wav')
-pygame.mixer.music.play(-1)
+# pygame.mixer.music.load('background.wav')
+# pygame.mixer.music.play(-1)
 
 #main game-loop
 running = True
 p = my_player()
 c = my_corona_1()
+for i in range(5):
+	c.spawn_corona(i)
+
 g = game_over()
 b = my_bullet()
 s = info_game()
@@ -69,6 +72,7 @@ while running:
 	  				b.bulletX = p.playerX
 	  				b.bulletY = p.playerY
 	  				b.fire_bullet(b.bullet_state, b.bulletX, b.bulletY, screen)
+			
 			elif event.key == pygame.K_ESCAPE:
 	  			print("Escape key.")
 			else:
@@ -101,8 +105,8 @@ while running:
 					c.corona_movX[i] = -c.corona_movX[i]
 					c.corona_movX[j] = -c.corona_movX[j]
 					if c.corona_1_Img[j] == c.corona_1_Img_right:
-						c.corona_1X[j] -= 4
-						c.corona_1X[i] += 4
+						c.corona_1X[j] -= 52 - abs(c.corona_1X[i] - c.corona_1X[j])
+						c.corona_1X[i] += 52 - abs(c.corona_1X[i] - c.corona_1X[j])
 						c.corona_1_Img[j] = c.corona_1_Img_left
 						c.corona_1_Img[i] = c.corona_1_Img_right
 					else:
@@ -117,22 +121,9 @@ while running:
 			b.bullet_state = 'ready'
 			b.bulletY = 800
 			s.score += 1
-			again = True
-			while again:
-				c.corona_1X[i] = random.randint(100, 600)
-				c.corona_1Y[i] = random.choice(c.corona_choice)
-				for j in range(0, 5):
-					if i == j:
-						continue
-					if (c.corona_1Y[i] == c.corona_1Y[j]) and abs((c.corona_1X[i] - c.corona_1X[j]) < 48):
-						again = True
-						break
-					else:
-						again = False
-						break
-		
-			#c.corona_1X[i] = random.randint(100, 600)
-			#c.corona_1Y[i] = random.choice(c.corona_choice)
+			c.spawn_corona(i)
+			if c.corona_movX[i] < 0:
+				c.corona_1_Img[i] = c.corona_1_Img_left
 			print(s.score)
 
 		if m.isCollision(c.corona_1X[i], c.corona_1Y[i], p.playerX, p.playerY):
