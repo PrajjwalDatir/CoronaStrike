@@ -66,7 +66,7 @@ while running:
 				# 				): 
 					c.corona_movX[i] = -c.corona_movX[i]
 					c.corona_movX[j] = -c.corona_movX[j]
-					if c.corona_1_Img[j] == c.corona_1_Img_right:
+					if c.corona_movX[i] > 0:
 						c.corona_1X[j] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1X[i] += (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1_Img[j] = c.corona_1_Img_left
@@ -76,7 +76,7 @@ while running:
 						c.corona_1X[i] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1_Img[j] = c.corona_1_Img_right 
 						c.corona_1_Img[i] = c.corona_1_Img_left
-
+						
 		if m.isCollision(c.corona_1X[i], c.corona_1Y[i], b.bulletX, b.bulletY):
 			explosion_sound = pygame.mixer.Sound('explosion.wav')
 			explosion_sound.play()
