@@ -18,7 +18,7 @@ class my_bullet():
 	def fire_bullet(self, bullet_state, x, y, screen):
 		# bullet is currently fired. and you can see it	
 		if bullet_state == 'fired':
-			screen.blit(self.bulletImg, (int(x + 10), int(y - 15)))
+			screen.blit(self.bulletImg, (x, y))
 
 	# Boundary conditions : don't leave the screen
 	def check_bullet(self, bullet_state, bulletX, bulletY, screen, dt):
@@ -27,3 +27,12 @@ class my_bullet():
 			bulletY -= (dt * self.bullet_vel)
 			self.fire_bullet(bullet_state, bulletX, bulletY, screen)
 		self.bulletY = bulletY
+
+	def shoot(self, p, screen):
+		bullet_sound = pygame.mixer.Sound('laser.wav')
+		bullet_sound.play()
+		self.bullet_state = 'fired'
+		self.bulletX = p.playerX
+		self.bulletY = p.playerY
+		# self.fire_bullet(b.bullet_state, b.bulletX, b.bulletY, screen)
+		screen.blit(self.bulletImg, (int(self.bulletX + 10), int(self.bulletY - 15)))

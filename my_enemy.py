@@ -25,13 +25,13 @@ class my_corona_1():
 			# self.corona_1Y.append(random.choice(self.corona_choice))
 			self.corona_1X[i] = random.randint(100, 600)
 			self.corona_1Y[i] = random.choice(self.corona_choice)
+			print("[", self.corona_1X[i], ",", self.corona_1Y[i], "]")
 			if i == 0:
 				break
-			for j in range(0, 5):
+			for j in range(0, i):
 				if i == j:
 					continue
-				print("[", self.corona_1X[i], ",", self.corona_1Y[i], "]")
-				if (abs(self.corona_1X[i] - self.corona_1X[j]) < 96):
+				if (self.corona_1Y[i] == self.corona_1Y[j]) and (abs(self.corona_1X[i] - self.corona_1X[j]) < 48):
 				# (self.corona_1Y[i] == self.corona_1Y[j]) and
 					again = True
 					# self.corona_1X.pop()
@@ -39,7 +39,6 @@ class my_corona_1():
 					break
 				else:
 					again = False
-					break
 
 
 	def corona_1(self, corona_1X, corona_1Y, screen):	
@@ -50,18 +49,18 @@ class my_corona_1():
 	def check_corona_1(self, dt):
 				#for corona_1
 		for i in range(5):
-			if self.corona_1X[i] <= 0:
+			if self.corona_1X[i] < 0:
 				self.corona_1X[i] = 0
 				self.corona_1_Img[i] = self.corona_1_Img_right
 				self.corona_movX[i] = -self.corona_movX[i]
 				self.corona_1Y[i] += self.corona_movY[i]	
-			elif self.corona_1X[i] >= 752:
+			elif self.corona_1X[i] > 752:
 				self.corona_1X[i] = 752
 				self.corona_1_Img[i] = self.corona_1_Img_left
 				self.corona_movX[i] = -self.corona_movX[i]
 				self.corona_1Y[i] += self.corona_movY[i]
-			if self.corona_1Y[i] <= 0:
+			if self.corona_1Y[i] < 0:
 				self.corona_1Y[i] = 0		
-			elif self.corona_1Y[i] >= 552:
+			elif self.corona_1Y[i] > 552:
 				self.corona_1Y[i] = 552
 			self.corona_1X[i] += self.corona_movX[i] * (dt * self.corona_vel)

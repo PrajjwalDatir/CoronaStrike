@@ -65,16 +65,10 @@ while running:
 				print("left")
 				p.player_movX = -(dt * p.player_vel)
 			elif event.key == pygame.K_SPACE:
-	  			if b.bullet_state == 'ready':
-	  				b.bullet_sound = pygame.mixer.Sound('laser.wav')
-	  				b.bullet_sound.play()
-	  				b.bullet_state = 'fired'
-	  				b.bulletX = p.playerX
-	  				b.bulletY = p.playerY
-	  				b.fire_bullet(b.bullet_state, b.bulletX, b.bulletY, screen)
-			
+				if b.bullet_state == 'ready':
+					b.shoot(p, screen)
 			elif event.key == pygame.K_ESCAPE:
-	  			print("Escape key.")
+				print("Escape key.")
 			else:
 				pass
 		if event.type == pygame.KEYUP:
@@ -105,13 +99,13 @@ while running:
 					c.corona_movX[i] = -c.corona_movX[i]
 					c.corona_movX[j] = -c.corona_movX[j]
 					if c.corona_1_Img[j] == c.corona_1_Img_right:
-						c.corona_1X[j] -= 52 - abs(c.corona_1X[i] - c.corona_1X[j])
-						c.corona_1X[i] += 52 - abs(c.corona_1X[i] - c.corona_1X[j])
+						c.corona_1X[j] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
+						c.corona_1X[i] += (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1_Img[j] = c.corona_1_Img_left
 						c.corona_1_Img[i] = c.corona_1_Img_right
 					else:
-						c.corona_1X[j] += 52 - abs(c.corona_1X[i] - c.corona_1X[j])
-						c.corona_1X[i] -= 52 - abs(c.corona_1X[i] - c.corona_1X[j])
+						c.corona_1X[j] += (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
+						c.corona_1X[i] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1_Img[j] = c.corona_1_Img_right 
 						c.corona_1_Img[i] = c.corona_1_Img_left
 
