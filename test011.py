@@ -11,6 +11,8 @@ from my_score import *
 from my_mechanics import *
 from my_bullet import *
 from my_movement import *
+from introScreen import *
+import sys
 
 #to initialize the pygame module
 pygame.init()
@@ -29,8 +31,19 @@ pygame.display.set_icon(icon)
 # pygame.mixer.music.load('background.wav')
 # pygame.mixer.music.play(-1)
 
+starting = start_game()
+run = starting.game_intro(screen)
+if run == False:
+	sys.exit()
+
+
+# need level selecting page
+
+
 #main game-loop
+
 running = True
+
 p = my_player()
 c = my_corona_1()
 for i in range(5):
@@ -42,6 +55,7 @@ s = info_game()
 m = mechanics()
 key = movement()
 clock = pygame.time.Clock()
+
 while running:
 	dt = clock.tick_busy_loop(30)
 	# Background color
