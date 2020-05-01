@@ -13,7 +13,7 @@ from my_bullet import *
 from my_movement import *
 from introScreen import *
 import sys
-
+from level import *
 #to initialize the pygame module
 pygame.init()
 
@@ -36,9 +36,9 @@ run = starting.game_intro(screen)
 if run == False:
 	sys.exit()
 
-
 # need level selecting page
-
+my_level = select_level()
+leevel = my_level.level_intro(screen)
 
 #main game-loop
 
@@ -66,9 +66,9 @@ while running:
 	c.corona_1(c.corona_1X, c.corona_1Y, screen)
 	s.my_score(screen)
 	s.my_fps(dt, screen)
-	
+
 	running = key.move(p, b, dt, screen)
-	
+
 	for i in range(5):		
 		for j in range(i + 1, 5):
 			if c.corona_1Y[i] == c.corona_1Y[j]:
@@ -116,4 +116,3 @@ while running:
 	if running == False:
 		g.game_over_text(screen)
 	pygame.display.update()
-	

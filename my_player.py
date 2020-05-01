@@ -8,7 +8,7 @@ class my_player():
 	def __init__(self):
 		self.playerImg = pygame.image.load('spaceship48X48.png')
 		self.playerX = 400
-		self.playerY = 500
+		self.playerY = 530
 		#self.coor_player = (playerX, playerY)
 		self.player_movX = 0
 		self.player_movY = 0

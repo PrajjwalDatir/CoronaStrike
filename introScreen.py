@@ -29,15 +29,19 @@ class start_game():
 			# 						(1, 0, 3, 128, 7, 192, 15, 224, 31, 240, 62, 248, 124, 124, 248, 62, 124, 124, 
 			# 						62, 248, 31, 240, 15, 224, 7, 192, 3, 128, 1, 0, 0, 0))
 			# print(my_mouse)
-			if 200 < my_mouse[0] < 550:
+			if 160 < my_mouse[0] < 550:
 				click = pygame.mouse.get_pressed()
-				if 200 < my_mouse[1] < 315:
+				if 160 < my_mouse[1] < 315:
 					if click[0] == 1:
-						print("start the game")
-						self.game_loop()
+						for event in pygame.event.get():
+							if event.type == pygame.QUIT:
+								return False
+							if event.type == pygame.MOUSEBUTTONUP:
+								print("start the game")
+								self.game_loop()
 					pygame.draw.rect(screen, Green, (200,200,350,125))
 					pygame.draw.rect(screen, Dark_Red, (200,400,350,125))
-				elif 400 < my_mouse[1] < 515:
+				elif 360 < my_mouse[1] < 515:
 					if click[0] == 1:
 						print("Quit the Game")
 						return self.game_exit()
@@ -63,4 +67,4 @@ class start_game():
 					if event.key == pygame.K_RETURN:
 						self.intro = False
 		return True
-			
+
