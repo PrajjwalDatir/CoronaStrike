@@ -108,6 +108,7 @@ class select_level():
 			screen.blit(blit_arcade, (275, 500))
 			
 			pygame.display.update()
+			
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()

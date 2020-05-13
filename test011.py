@@ -1,4 +1,5 @@
 # test011.py
+import sys
 import pygame
 import time
 import random
@@ -12,7 +13,6 @@ from my_mechanics import *
 from my_bullet import *
 from my_movement import *
 from introScreen import *
-import sys
 from level import *
 from my_boss import *
 # import pygame.sprite as sprite
@@ -31,8 +31,9 @@ pygame.display.set_caption("Corona Strike 0.0.1")
 icon = pygame.image.load('Code_Maniac.jpg')
 pygame.display.set_icon(icon)
 
-# pygame.mixer.music.load('background.wav')
-# pygame.mixer.music.play(-1)
+pygame.mixer.music.load('background.wav')
+pygame.mixer.music.play(-1)
+
 
 starting = start_game()
 run = starting.game_intro(screen)
@@ -68,6 +69,8 @@ while running:
 	# Background Image
 	screen.blit(background, (0,0))
 	p.player(p.playerX, p.playerY, screen)
+
+
 	c.corona_1(c.corona_1X, c.corona_1Y, screen)
 	# rb.boss_draw(screen)
 	s.my_score(screen)
@@ -78,7 +81,8 @@ while running:
 	# checking game finish
 	dead = 0
 
-	for i in range(5):		
+	for i in range(5):
+						
 		if not c.alive[i]:
 				dead += 1
 				continue
@@ -97,13 +101,13 @@ while running:
 					if c.corona_movX[i] > 0:
 						c.corona_1X[j] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1X[i] += (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
-						c.corona_1_Img[j] = c.corona_1_Img_left
-						c.corona_1_Img[i] = c.corona_1_Img_right
+						c.corona_1_Img[j] = c.corona_1_Img_left[j]
+						c.corona_1_Img[i] = c.corona_1_Img_right[i]
 					else:
 						c.corona_1X[j] += (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
 						c.corona_1X[i] -= (48 - abs(c.corona_1X[i] - c.corona_1X[j]))/2
-						c.corona_1_Img[j] = c.corona_1_Img_right 
-						c.corona_1_Img[i] = c.corona_1_Img_left
+						c.corona_1_Img[j] = c.corona_1_Img_right[j]
+						c.corona_1_Img[i] = c.corona_1_Img_left[i]
 						
 		if m.isCollision(c.corona_1X[i], c.corona_1Y[i], b.bulletX, b.bulletY):
 			explosion_sound = pygame.mixer.Sound('explosion.wav')
@@ -119,13 +123,23 @@ while running:
 					c.alive[i] = False
 					s.score += 1
 			if c.corona_movX[i] < 0:
-				c.corona_1_Img[i] = c.corona_1_Img_left
-			print(s.score)
+				c.corona_1_Img[i] = c.corona_1_Img_left[i]
+			# print(s.score)
 		if m.isCollision(c.corona_1X[i], c.corona_1Y[i], p.playerX, p.playerY):
 			running = False
 				
 	if dead == 5:
+		g.win_game(screen)
+		screen.blit(background, (0,0))
+
+		pygame.display.update()
 		running = False
+
+	if not mode == 5:
+		for i in range(5):
+			c.corona_1_Img_left[i] = pygame.image.load(c.Img_left[mode - c.health[i]])
+			c.corona_1_Img_right[i] = pygame.image.load(c.Img_right[mode - c.health[i]])
+
 	c.check_corona_1(dt)
 
 	# boss collision
@@ -161,7 +175,5 @@ while running:
 
 	if running == False:
 		g.game_over_text(screen)
-		pygame.display.update()
-		#time.sleep(2)
 
 	pygame.display.update()
