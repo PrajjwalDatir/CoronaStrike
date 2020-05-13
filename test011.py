@@ -112,6 +112,7 @@ while running:
 			b.bulletY = 800
 			if mode == 5:
 				c.spawn_corona(i)
+				s.score += 1
 			else:
 				c.health[i] -= 1
 				if c.health[i] == 0: 
