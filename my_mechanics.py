@@ -11,3 +11,4 @@ class mechanics():
 		if distance < 48:
 			return True
 		return False
+		

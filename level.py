@@ -19,8 +19,16 @@ class select_level():
 
 	def level_intro(self, screen):
 		intro = True
+		background1 = pygame.image.load('Bat.png').convert()
+		background2 = pygame.image.load('Bat.png').convert()
+		background3 = pygame.image.load('Bat.png').convert()
+		background4 = pygame.image.load('Bat.png').convert()
 		while intro:
 			screen.fill((0,0,0))
+			screen.blit(background1, (0,50))
+			screen.blit(background2, (500,50))
+			screen.blit(background3, (0,350))
+			screen.blit(background4, (500,350))
 			my_mouse = pygame.mouse.get_pos() # in the form [x,y]
 			font = pygame.font.Font('DoubleFeature20.ttf', 32)
 			blit_level1 = font.render("level 1", True, (255, 255, 255))

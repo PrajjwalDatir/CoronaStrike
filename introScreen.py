@@ -17,8 +17,11 @@ class start_game():
 
 	def game_intro(self, screen):
 		# self.intro = True
+		background = pygame.image.load('banner2.jpg').convert()
 		while self.intro:
 			screen.fill((0,0,0))
+			#background Image
+			screen.blit(background, (0,0))
 			my_mouse = pygame.mouse.get_pos() # in the form [x,y]
 			font = pygame.font.Font('DoubleFeature20.ttf', 32)
 			blit_score = font.render("start the game :)", True, (0, 0, 0))

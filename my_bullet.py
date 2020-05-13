@@ -36,3 +36,5 @@ class my_bullet():
 		self.bulletY = p.playerY
 		# self.fire_bullet(b.bullet_state, b.bulletX, b.bulletY, screen)
 		screen.blit(self.bulletImg, (int(self.bulletX + 10), int(self.bulletY - 15)))
+
+#	def home_missile(self, p, rb, screen):

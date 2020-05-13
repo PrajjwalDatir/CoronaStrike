@@ -6,9 +6,11 @@ import math
 
 class my_corona_1():
 #level 1 corona-virus
-	def __init__(self):
-		self.corona_1_Img_right = pygame.image.load('corona_2.png')
-		self.corona_1_Img_left = pygame.image.load('corona_1.png')
+	def __init__(self, mode):
+		self.Img_right = ['corona_2_h1.png', 'corona_2_h2.png', 'corona_2_h3.png', 'corona_2_h4.png', 'corona_2_h5.png']
+		self.corona_1_Img_right = pygame.image.load(self.Img_right[0])
+		self.Img_left = ['corona_1_h1.png', 'corona_1_h2.png', 'corona_1_h3.png', 'corona_1_h4.png', 'corona_1_h5.png']
+		self.corona_1_Img_left = pygame.image.load(self.Img_left[0])
 		self.corona_1_Img = [self.corona_1_Img_right]*5
 		self.corona_1X = [None]*5
 		self.corona_1Y = [None]*5
@@ -16,6 +18,9 @@ class my_corona_1():
 		self.corona_movX = [1]*5
 		self.corona_movY = [48]*5
 		self.corona_vel = 0.3
+		print("thy modeva ", mode)
+		self.health = [mode]*5
+		self.alive = [True]*5
 		
 	def spawn_corona(self, i):
 		# for i in range(5):
@@ -25,7 +30,7 @@ class my_corona_1():
 			# self.corona_1Y.append(random.choice(self.corona_choice))
 			self.corona_1X[i] = random.randint(100, 600)
 			self.corona_1Y[i] = random.choice(self.corona_choice)
-			print("[", self.corona_1X[i], ",", self.corona_1Y[i], "]")
+			# print("[", self.corona_1X[i], ",", self.corona_1Y[i], "]")
 			if i == 0:
 				break
 			for j in range(0, i):
@@ -43,6 +48,8 @@ class my_corona_1():
 
 	def corona_1(self, corona_1X, corona_1Y, screen):	
 		for i in range(5):
+			if not self.alive[i]:
+				continue
 			screen.blit(self.corona_1_Img[i], (int(corona_1X[i]), int(corona_1Y[i])))
 
 	# Boundary conditions : don't leave the screen
