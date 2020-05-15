@@ -64,4 +64,6 @@ Github link :https://github.com/PrajjwalDatir/CoronaStrike
 
 
 
-licensed by Code_Maniac
+licensed by Prajjwal Datir.
+
+DO NOT COPY without permission.
