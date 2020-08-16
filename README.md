@@ -2,24 +2,9 @@
 
 ![Code_Maniac](Code_Maniac.jpg)
 
-Here is our College project repo to build a python game using PyGame.
+It is my College project repo to build a python game using PyGame.
 
 ----THE CORONA STRIKE-----
-
-Corona Strike
-
-Group Name -  _Blank_
-
-Class -Div2
-Batch- S1
-
-Group Members :
-
-1.) Sarah Hussain -111803124
-
-2.) Prajjwal Datir - 111803131
-
-3.) Siddhika Bejekar - 11180136
 
 Reason for selecting Problem: 
 
@@ -29,7 +14,7 @@ The more we engage people with the activities the lesser the chance of them brea
 Also making a CoronaStrike game was an unique idea because instead of feeding people with too much scary corona news
 like live deaths and more scary incidents it brings out the positivity and sense of relief.
 And honestly who doesn't like playing relatable games and especially in this quarantine period.
-Thus we selected to work on the game.
+Thus I selected to work on the game.
  
 
 Current state of art to solve the problem:  
@@ -38,11 +23,11 @@ Currently, even though there are many games in windows store ,steam and play sto
 Also "Not a One" of them is related to current corona pandemic 
 which doesn't gives player a sense of connection between game and the player.
 
-Our solution to problem :
+My solution to problem :
 
-So we made a game where you can fight with the Covid-19 virus virtually. 
+So I made a game where you can fight with the Covid-19 virus virtually. 
 And get the revenge of all the future plans it cancelled.
-We tried to keep it as relatable and easy to play as possible.
+I tried to keep it as relatable and easy to play as possible.
 All age groups can play it because of it's simple gameplay.
 
 Technology used : 
